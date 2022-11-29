@@ -3,7 +3,11 @@ Descripción del proyecto:
 Crear una Playlist y calcular la cantidad de canciones y la duración total 
 */
 
-alert ("Bienvenido, ¡Vamos a armar tu Playlist!")
+saludarUsuario();
+
+function saludarUsuario() {
+    alert("Bienvenido, ¡Vamos a armar tu Playlist!");
+}
 
 let dato = prompt("Ingrese canción, para finalizar ingrese 0")
 
