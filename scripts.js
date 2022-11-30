@@ -9,15 +9,15 @@ function saludarUsuario() {
     alert("Bienvenido, ¡Vamos a armar tu Playlist!");
 }
 
-let dato = prompt("Ingrese canción, para finalizar ingrese 0")
+let dato = prompt("Ingrese el nombre de una canción, para finalizar ingrese 0")
 
 let cancionTotal = 0
 let duracionTotal = 0
 
 while (dato !== '0') {
     cancionTotal ++
-    duracionTotal += parseInt(prompt("Ingrese duración en minutos"))
-    dato = prompt("Ingrese el nombre de la canción")
+    duracionTotal += parseInt(prompt("Ingrese la duración de " + dato + " (en minutos)" ))
+    dato = prompt("Ingrese el nombre de otra canción, presione 0 para salir")
 }
 
 /* Con array. Guarda el nombre
@@ -40,16 +40,19 @@ for (let i = 0; i < lista.length; i++) {
 }
 */
 
-let tiempo
+calcularTiempo();
 
-if(duracionTotal <= 60) {
-    tiempo = "Tu Playlist es corta"
-}
-else {
-    tiempo = "Tu Playlist es larga"
-}
+function calcularTiempo() {
+    let tiempo
 
-console.log("Tu Playlist tiene: " + cancionTotal + " canciones, y dura: " + duracionTotal + " minutos. " + tiempo )
+    if(duracionTotal <= 60) {
+        tiempo = "Es una Playlist corta"
+    }
+    else {
+        tiempo = "Es una Playlist larga"
+    }
+    console.log("Tu Playlist tiene: " + cancionTotal + " canciones, y dura: " + duracionTotal + " minutos. " + tiempo )
+}
 
 /* Idea previa 
 
