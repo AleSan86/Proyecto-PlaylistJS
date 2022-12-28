@@ -4,17 +4,178 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
     <title>JS - Sandrin</title>
   </head>
 
   <body>
     <div class="background">
-      
-      <div id="mostrarListas" style="height: 500px;"></div>
+      <div class="header" id="titulo">
+        <div class="inner-header flex">
+          <img src="./img/Music_logo.png" class="logo">
+          <h1>Bienvenidos</h1>
+        </div>
 
-    </div>
+        <!--Animación header-->
+        <div>
+          <svg
+            class="waves"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28"
+            preserveAspectRatio="none"
+            shape-rendering="auto"
+          >
+            <defs>
+              <path
+                id="gentle-wave"
+                d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+              />
+            </defs>
+            <g class="parallax">
+              <use
+                xlink:href="#gentle-wave"
+                x="48"
+                y="0"
+                fill="rgba(255,255,255,0.7"
+              />
+              <use
+                xlink:href="#gentle-wave"
+                x="48"
+                y="3"
+                fill="rgba(255,255,255,0.5)"
+              />
+              <use
+                xlink:href="#gentle-wave"
+                x="48"
+                y="5"
+                fill="rgba(255,255,255,0.3)"
+              />
+              <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+          </svg>
+        </div>
 
-    <script type="text/javascript" src="scripts.js"></script>
+        <div class="content flex">
+          <h2 class="subtitulos" id="subtitulos">¡Vamos a crear tus Playlist's!</h2>
+          <button class="boton third" data-bs-toggle="modal" data-bs-target="#staticBackdrop">¿Cómo funciona?</button>
+          <a href="#buscar">Buscar</a>
+          <a href="./login.html">Login</a>
+        </div>
+
+        <!-- Modal (No funca) -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Instrucciones</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>
+                Descripción del proyecto: Crear una Playlist y calcular la cantidad de
+                canciones y la duración total
+              </p>
+              <p>
+                  Crear y administrar Playlist's y realizar distintos calculos informátivos para el usuario
+              </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contenido-cards">
+          <p class="mensajes">Aquí te dejamos nuestras sugerencias</p>
+
+            <div class="btn-group mb-5" role="group" aria-label="Basic mixed styles example">
+              <button type="button" class="btn btn-secondary filtro" id="60">Oldies</button>
+              <button type="button" class="btn btn-danger filtro" id="70">70's</button>
+              <button type="button" class="btn btn-warning filtro" id="80">80's</button>
+              <button type="button" class="btn btn-success filtro" id="90">90's</button>
+              <button type="button" class="btn btn-dark filtro" id="20">Modern</button>
+            </div>
+          
+          <div id="contenedorCanciones" class="row col-8"></div>
+          <div class="col-4 selectUsuario" id="selectCanciones"></div>
+        </div>
+
+        <div class="container row-cols-md-12">
+            <div class="card-free card-centered">
+              <div class="card-content">
+                <a href="#" class="title-free">
+                <h2 class="gap-sm-bottom title-free mb-3"><span class="title-free">Es</span> Gratis</h2>
+                </a>
+                <div class="gap-m-bottom">Música, podcasts y radios, además de recomendaciones solo para ti.</div>
+                <a type="button" class="btn btn-dark btn-sm boton-free" href="./login.html">Regístrate gratis</a>
+                <div class="card-text-sm gap-xs-bottom">No se necesita ningún pago</div>
+
+                <button type="button" class="btn btn-dark btn-sm boton-free">Más información</button>
+              </div>
+          </div>
+
+          <div class="divider">
+            <span class="divider-line"></span>
+              <div class="divider-text">¿Te quedaste sin internet? ¡No pasa nada!</div>
+            <span class="divider-line"></span>
+          </div>
+
+          <h2 class="subtitulos">Descarga tus listas para escucharlos sin conexión y ahorrarte datos.</h2>
+
+        </div>
+
+        <div class="content pt-5" id="buscar">
+          <h2 class="subtitulos">¿Querés buscar tu canción?</h2>
+          <a href="#titulo">ir arriba</a>
+        </div>
+
+        <div class="container flex">
+          <div class="col-6 col-md-6">
+              <label for="formFileLg" class="form-label mt-5">Podes buscar tu canción acá</label>
+              <!-- <input type="text" id="buscador" class="form-control form-control-lg my-2" placeholder="..."> -->
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="buscador" placeholder="..."  aria-describedby="button-addon2">
+                <button class="btn btn-outline-dark" type="button" onclick="filtrarBusqueda()">Buscar</button>
+              </div>
+          </div>
+        </div>
+
+        <div class="contenido-cards">
+            <div class="row col-8" id="resultado"></div>
+        </div>
+
+        <div style="height: 100px;"></div>
+
+      </div>
+
+    <!-- <script type="module" src="scripts.js"></script> -->
+    <script src="songs.js"></script>
+    <script src="scripts.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+      crossorigin="anonymous"
+    ></script>
 
   </body>
 </html>

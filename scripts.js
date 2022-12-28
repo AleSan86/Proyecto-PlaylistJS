@@ -1,3 +1,252 @@
+//import canciones from './songs.json' assert{type: 'json'};
+
+const canciones = [{
+    id: 1, title: "Like a Rolling Stone", artist: "Bob Dylan", album: "Highway 61 Revisited", year: "1965", img: "img/OnoMichio_logo.jpg"
+},
+{
+    id: 2, title: "(I Can't Get No) Satisfaction", artist: "The Rolling Stones", album: "Out of Our Heads", year: "1965", img: "img/OnoMichio_logo3.jpg"
+},
+{
+    id: 3, title: "Imagine", artist: "John Lennon", album: "Imagine", year: "1971", img: "img/Fish.gif"
+},
+{
+    id: 4, title: "What's Going On", artist: "Marvin Gaye", album: "What's Going On", year: "1971", img: "img/Hellfish.png"
+},
+{
+    id: 5, title: "Respect", artist: "Aretha Franklin", album: "I Never Loved a Man the Way I Love You", year: "1967", img: "img/OnoMichio_logo3.jpg"
+},
+{
+    id: 6, title: "Johnny B. Goode", artist: "Chuck Berry", album: "The Anthology", year: "1958", img: "img/Krusty.png"
+},
+{
+    id: 7, title: "Hey Jude", artist: "The Beatles", album: "Hey Jude", year: "1968", img: "img/Rasca y Pica.jpg"
+},
+{
+    id: 8, title: "Sweet Emotion", artist: "Aerosmith", album: "Toys in the Attic", year: "1975", img: "img/OnoMichio_ Finish.PNG"
+},
+{
+    id: 9, title: "In Bloom", artist: "Nirvana", album: "Nevermind", year: "1991", img: "img/OnoMichio _ups.PNG"
+},
+{
+    id: 10, title: "Piano Man", artist: "Billy Joel", album: "Piano Man", year: "1973", img: "img/Hellfish.png"
+},
+{
+    id: 11, title: "Blue Suede Shoes", artist: "Elvis Presley", album: "2nd to None", year: "1956", img: "img/Rasca y Pica.jpg"
+},
+{
+    id: 12, title: "William", artist: "The Smiths", album: "Louder Than Bombs", year: "1984", img: "img/OnoMichio_logo.jpg"
+},
+{
+    id: 13, title: "American Idiot", artist: "Green day", album: "American Idiot", year: "2004", img: "img/OnoMichio_ Finish.PNG"
+},
+{
+    id: 14, title: "Smoke on the Water", artist: "Deep Purple", album: "Machine Head", year: "1972", img: "img/Fish.gif"
+},
+{
+    id: 15, title: "New Year's Day", artist: "U2", album: "War", year: "1983", img: "img/OnoMichio_logo.jpg"
+},
+{
+    id: 16, title: "Ramble On", artist: "Led Zeppelin", album: "Led Zeppelin II", year: "1969", img: "img/OnoMichio_logo3.jpg"
+}
+]
+
+const playlist = [];
+
+window.onload = (event) => {
+    localStorage.setItem("canciones", JSON.stringify(canciones));
+    localStorage.setItem("Tu Playlist", JSON.stringify(playlist));
+};
+
+//Modificamos el DOM mostrando las canciones: 
+const contenedorCanciones = document.getElementById("contenedorCanciones");
+
+/* Función para Mostrar canciones */
+const mostrarCanciones = (canciones) => {
+    
+    contenedorCanciones.innerHTML = "";
+    canciones.forEach( cancion => {
+        const card = document.createElement("div");
+        card.classList.add("col-xl-3", "col-md-6", "col-xs-12");
+        card.innerHTML = `
+                <div class="card">
+                    <img src="${cancion.img}" class="card-img-top imgCanciones" alt="${cancion.title}">
+                    <div class= "card-body">
+                        <h5>${cancion.artist}</h5>
+                        <p> ${cancion.year} </p>
+                        <button class="btn btn-warning" id="boton${cancion.id}"> + </button>
+                    </div>
+                </div>
+                        `
+        contenedorCanciones.appendChild(card);
+
+        const boton = document.getElementById(`boton${cancion.id}`);
+        boton.addEventListener("click", () => {
+            agregarCanciones(cancion.id);
+        })
+    })
+}
+
+mostrarCanciones(canciones);
+
+/* Función para Agregar canciones */
+const agregarCanciones = (id) => {
+    const cancionesAgregadas = playlist.find(cancion => cancion.id === id);
+    if(cancionesAgregadas) {
+        console.log("¡Esta canción ya está en tu lista!");
+    } else {
+        const cancion = canciones.find(cancion => cancion.id === id);
+        playlist.push(cancion);
+        localStorage.setItem("Tu Playlist", JSON.stringify(playlist));
+        renderPlaylist();
+    }
+}
+
+const cancionesAgregadas = document.getElementById("selectCanciones");
+
+/* Función para mostrar canciones agregadas */
+function renderPlaylist() {
+    cancionesAgregadas.innerHTML = "<ol class=estiloSelect>";
+    playlist.forEach(c => {
+        cancionesAgregadas.innerHTML += 
+        `<li> ${c.title}  
+        <button class="btn btn-sm badge text-bg-dark eliminar-cancion" id="${c.id}"> - </button>
+        </li>`
+    })
+    cancionesAgregadas.innerHTML += "</ol>"
+    const botones = document.querySelectorAll(".eliminar-cancion");
+        botones.forEach( b => {
+            b.addEventListener("click", () => {
+            let id = b.id
+            eliminarCancion(id);
+        })
+    })
+}
+
+/* Función para quitar canciones seleccionadas de la Playlist */
+const eliminarCancion = (id) => {
+    const cancionEliminada = playlist.find(cancion => cancion.id === parseInt(id));
+    if(cancionEliminada) {
+        const indice = playlist.indexOf(cancionEliminada);
+        playlist.splice(indice, 1);
+        localStorage.setItem("Tu Playlist", JSON.stringify(playlist));
+        renderPlaylist();
+    } 
+    else {
+        console.log("No hay nada para eliminar")
+    }
+}
+
+/* Función para buscar canciones */
+const resultado = document.getElementById("resultado");
+const buscador = document.getElementById("buscador");
+
+const filtrarBusqueda = () => {
+    resultado.innerHTML = '';
+    const texto = buscador.value.toLowerCase();
+
+    for (let cancion of canciones){
+
+        let nombreCancion = cancion.title.toLowerCase();
+
+            if (nombreCancion.indexOf(texto) !== -1){
+                const card = document.createElement("div");
+                card.classList.add("col-xl-3", "col-md-6", "col-xs-12");
+                resultado.innerHTML += 
+                `<div class="col-xl-3 col-md-6 col-sm-12">
+                <div class="row">
+                    <div class="card" id="resultado">
+                        <div class="card-body">
+                            <img src="${cancion.img}" class="card-img-top imgCanciones" alt="${cancion.title}">
+                            <h5 class="card-title">${cancion.title}</h5>
+                            <p class="card-title">de ${cancion.artist}</p>
+                            <button class="btn btn-warning agregar-cancion" id="${cancion.id}"> + </button>
+                        </div>
+                    </div>
+                    </div>
+                </div>`
+            }
+        }
+        const botones = document.querySelectorAll(".agregar-cancion");
+        botones.forEach(b => {
+            b.addEventListener("click", () => {
+            let id = parseInt(b.id)
+            agregarCanciones(id);
+        })
+    })
+
+    if ( resultado.innerHTML === '' ){
+        resultado.innerHTML = `<h2>No hay resultados</h2>`
+    }
+}
+
+buscador.addEventListener('keypress', event => {
+    if (event.key === "Enter") {
+    filtrarBusqueda();
+    }
+})
+//filtrarBusqueda();
+
+/* Filtrar por años */
+const filtro = document.querySelectorAll(".filtro");
+
+filtro.forEach(b => {
+    b.addEventListener("click", () => {
+    let anio = parseInt(b.id);
+    console.log(b.id);
+    renderFiltro(anio);
+    })
+})
+
+function renderFiltro(anio) {
+    let filtro = [];
+
+    switch(anio){
+        case 60:
+            filtro = canciones.filter(cancion => cancion.year < 1970);
+            break;
+        case 70:
+            filtro = canciones.filter(cancion => cancion.year < 1980 && cancion.year >= 1970);
+            break;
+        case 80:
+            filtro = canciones.filter(cancion => cancion.year < 1990 && cancion.year >= 1980);
+            break;
+        case 90:
+            filtro = canciones.filter(cancion => cancion.year < 2000 && cancion.year >= 1990);
+            break;
+        case 20:
+            filtro = canciones.filter(cancion => cancion.year > 1999);
+            break;
+        default:
+            mostrarCanciones(canciones);
+    }
+
+    //console.log(filtro);
+    if (filtro.length > 0) {
+        mostrarCanciones(filtro);
+        filtro = []
+    }else 
+        mostrarCanciones(canciones);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /***************************PRIMER PRE-ENTREGA*************************************/
 /************************Descripción del proyecto:*********************************/
 /***Crear una Playlist y calcular la cantidad de canciones y la duración total ***/
@@ -71,11 +320,8 @@ while (i < dato) {
 /***************************SEGUNDA PRE-ENTREGA*************************************/
 /************************Descripción del proyecto:*********************************/
 /***Crear una Playlist y calcular la cantidad de canciones y la duración total ***/
-
-/* Carga de Playlist */
-const arrayPlaylist = [{nombreCancion: "Coma", artista: "STP"},
-{nombreCancion: "Low", artista: "Cracker"}, {nombreCancion: "Atlanta", artista: "STP"},
-{nombreCancion: "Rosier", artista: "Luna Sea"}, {nombreCancion: "Money", artista: "Pink Floyd"},];
+/*
+let dato = bienvenida();
 
 class Playlist {
     constructor(nombreCancion, artista) {
@@ -84,30 +330,25 @@ class Playlist {
     }
 }
 
-bienvenida();
-
-/* Prueba Array 
+Prueba Array 
 const playlist1 = new Playlist("Coma", "STP");
 const playlist2 = new Playlist("Low", "Cracker");
 const playlist3 = new Playlist("Rosier", "Luna Sea");
 const playlist4 = new Playlist("Atlanta", "STP");
+
+const arrayPlaylist = [];
+
 arrayPlaylist.push(playlist1);
 arrayPlaylist.push(playlist2);
 arrayPlaylist.push(playlist3);
 arrayPlaylist.push(playlist4);
-*/
 
-/* Funciones */
+Funciones
 
 function bienvenida() {
-    let dato = parseInt(prompt("Bienvenido, elija una opción: \n" + "1- Ingresar canciones a tu lista. \n" +
-    "2- Modificar tu lista. \n" + "3- Eliminar canciones. \n" + "4- Buscar una canción en tu Playlist. \n" + "5- Salir."));
-    selector(dato);
-    while(dato!=5){
-        dato = parseInt(prompt("Cómo seguimos?: \n" + "1- Ingresar canciones a tu lista. \n" +
-        "2- Modificar tu lista. \n" + "3- Eliminar canciones. \n" + "4- Buscar una canción en tu Playlist. \n" + "5- Salir."));
-        selector(dato);
-    }
+    let dato = parseInt(prompt("Bienvenido, elija una opción: \n" + "1- Ingresar canciones a tu lista \n" +
+    "2- Modificar tu lista. \n" + "3- Eliminar canciones \n" + "4- Buscar una canción en tu Playlist. \n" + "5- Salir."));
+    return dato;
  }
 
 function agregarCancion() {
@@ -119,34 +360,29 @@ function agregarCancion() {
 }
 
 function modificarCancion() {
-    let nombreCancion = prompt("Ingresa el título de la canción que queres modificar: \n");
-    let playlist = arrayPlaylist.find(playlist => playlist.nombreCancion.toLowerCase() === nombreCancion.toLowerCase());
+    let artista = prompt("Busquemos al artista: \n - Ingresa el nombre");
+    let playlist = arrayPlaylist.find(playlist => playlist.artista === artista);
     let indice = arrayPlaylist.indexOf(playlist);
-    let nuevaCancion = new Playlist(prompt("Ingresa el título de la nueva canción: \n"), prompt("Ingresa el artista de la nueva canción: \n"));
+    let nombreCancion = prompt("Ingresa el título de la canción: \n");
+    let nuevaCancion = new Playlist(nombreCancion, artista);
     arrayPlaylist.splice(indice, 1, nuevaCancion);
     console.log(arrayPlaylist);
     console.table(arrayPlaylist);
 }
 
 function eliminarCancion() {
-    let nombreCancion = prompt("Busquemos la canción, por favor ingresa el nombre");
-    let playlist = arrayPlaylist.find(playlist => playlist.nombreCancion.toLowerCase() === nombreCancion.toLowerCase());
+    let artista = prompt("Busquemos al artista: \n - Ingresa el nombre");
+    let playlist = arrayPlaylist.find(playlist => playlist.artista === artista);
     let indice = arrayPlaylist.indexOf(playlist);
     arrayPlaylist.splice(indice, 1);
-    console.log(nombreCancion + " se eliminó de tu Playlist!");
     console.log(arrayPlaylist);
     console.table(arrayPlaylist);
 }
 
 function buscarCancion() {
-    let nombreCancion = prompt("Busquemos tu canción, ingresa el nombre");
-    let playlist = arrayPlaylist.find(playlist => playlist.nombreCancion.toLowerCase() === nombreCancion.toLowerCase());
-    if(playlist) {
-        alert(playlist.nombreCancion + " de " + playlist.artista + " está en tu Playlist!");
-    }
-    else {
-        alert("Esta canción no está en tu Playlist.");
-    }
+    let nombreCancion = prompt("Busquemos tu canción: \n - Ingresa el nombre");
+    let playlist = arrayPlaylist.find(playlist => playlist.nombreCancion === nombreCancion);
+    console.log(playlist);
 }
 
 function salir() {
@@ -156,19 +392,15 @@ function salir() {
         console.log("Ups... no tienes una Playlist armada");
     }
     else {
-        const tabla = document.getElementById('mostrarListas');
-        tabla.innerHTML = '<ul>'
-        arrayPlaylist.forEach( playlist => {
-        tabla.innerHTML += `<li> ${playlist.nombreCancion} 
-                     ${playlist.artista}</li>`;
-        })
-        tabla.innerHTML += '</ul>';
         console.table(arrayPlaylist);
+        for (let playlist of arrayPlaylist){
+            document.write("<table><tr><th>Artista:</th></table><p>"+playlist.artista+"</p>");
+            document.write("<table><tr><th>Canción:</th></table><p>"+playlist.nombreCancion+"</p>");
+        }
     }
 }
 
-function selector(dato){
-    switch (dato){
+switch (dato){
     case 1:
         agregarCancion();
         break;
@@ -185,9 +417,11 @@ function selector(dato){
         salir();
         break;           
     default:
-        alert(`No se admite esta opción`);
-        console.log(`No se admite esta opción`);
+        alert(`No se admite esta opción, ${dato} no se conoce.`);
+        console.log(`No se admite esta opción, ${dato} no se conoce.`);
         break;     
-}}
+}
+*/
+
 
 
