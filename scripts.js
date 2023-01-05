@@ -47,6 +47,9 @@ const canciones = [{
 },
 {
     id: 16, title: "Ramble On", artist: "Led Zeppelin", album: "Led Zeppelin II", year: "1969", img: "img/OnoMichio_logo3.jpg"
+},
+{
+    id: 17, title: "Last Nite", artist: "The Strokes", album: "Is This It", year: "2001", img: "img/OnoMichio_logo3.jpg"
 }
 ]
 
@@ -73,7 +76,7 @@ const mostrarCanciones = (canciones) => {
                     <div class= "card-body">
                         <h5>${cancion.artist}</h5>
                         <p> ${cancion.year} </p>
-                        <button class="btn btn-warning" id="boton${cancion.id}"> + </button>
+                        <button class="btn btn-warning boton-agregar" id="boton${cancion.id}"> + </button>
                     </div>
                 </div>
                         `
@@ -92,12 +95,14 @@ mostrarCanciones(canciones);
 const agregarCanciones = (id) => {
     const cancionesAgregadas = playlist.find(cancion => cancion.id === id);
     if(cancionesAgregadas) {
+        mostrarAlert();
         console.log("¡Esta canción ya está en tu lista!");
     } else {
         const cancion = canciones.find(cancion => cancion.id === id);
         playlist.push(cancion);
         localStorage.setItem("Tu Playlist", JSON.stringify(playlist));
         renderPlaylist();
+        llamarToastAgregar();
     }
 }
 
@@ -130,6 +135,7 @@ const eliminarCancion = (id) => {
         playlist.splice(indice, 1);
         localStorage.setItem("Tu Playlist", JSON.stringify(playlist));
         renderPlaylist();
+        llamarToastQuitar();
     } 
     else {
         console.log("No hay nada para eliminar")
@@ -188,11 +194,10 @@ buscador.addEventListener('keypress', event => {
 
 /* Filtrar por años */
 const filtro = document.querySelectorAll(".filtro");
-
 filtro.forEach(b => {
     b.addEventListener("click", () => {
     let anio = parseInt(b.id);
-    console.log(b.id);
+    //console.log(b.id);
     renderFiltro(anio);
     })
 })
@@ -220,7 +225,6 @@ function renderFiltro(anio) {
             mostrarCanciones(canciones);
     }
 
-    //console.log(filtro);
     if (filtro.length > 0) {
         mostrarCanciones(filtro);
         filtro = []

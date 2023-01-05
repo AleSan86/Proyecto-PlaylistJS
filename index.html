@@ -15,6 +15,7 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
     <title>JS - Sandrin</title>
@@ -70,44 +71,21 @@
 
         <div class="content flex">
           <h2 class="subtitulos" id="subtitulos">¡Vamos a crear tus Playlist's!</h2>
-          <button class="boton third" data-bs-toggle="modal" data-bs-target="#staticBackdrop">¿Cómo funciona?</button>
-          <a href="#buscar">Buscar</a>
-          <a href="./login.html">Login</a>
-        </div>
-
-        <!-- Modal (No funca) -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Instrucciones</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p>
-                Descripción del proyecto: Crear una Playlist y calcular la cantidad de
-                canciones y la duración total
-              </p>
-              <p>
-                  Crear y administrar Playlist's y realizar distintos calculos informátivos para el usuario
-              </p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              </div>
-            </div>
-          </div>
+          <button class="boton third" id="botonInfo" data-bs-toggle="modal" data-bs-target="#staticBackdrop">¿Cómo funciona?</button>
         </div>
 
         <div class="contenido-cards">
           <p class="mensajes">Aquí te dejamos nuestras sugerencias</p>
 
-            <div class="btn-group mb-5" role="group" aria-label="Basic mixed styles example">
+            <div class="btn-group mb-1" role="group" aria-label="Basic mixed styles example">
               <button type="button" class="btn btn-secondary filtro" id="60">Oldies</button>
               <button type="button" class="btn btn-danger filtro" id="70">70's</button>
               <button type="button" class="btn btn-warning filtro" id="80">80's</button>
               <button type="button" class="btn btn-success filtro" id="90">90's</button>
               <button type="button" class="btn btn-dark filtro" id="20">Modern</button>
+            </div>
+            <div class="col-6 mx-auto mb-5">
+              <button class="btn btn-md btn-outline-light" type="button" onclick="mostrarCanciones(canciones);">Mostrar todas las canciones</button>
             </div>
           
           <div id="contenedorCanciones" class="row col-8"></div>
@@ -162,10 +140,7 @@
 
       </div>
 
-    <!-- <script type="module" src="scripts.js"></script> -->
-    <script src="songs.js"></script>
-    <script src="scripts.js"></script>
-
+    <!--Script Bootstrap-->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
@@ -176,6 +151,14 @@
       integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
       crossorigin="anonymous"
     ></script>
+    <!--Script Sweetalert2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--Script Toastify-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script src="songs.js"></script>
+    <script src="librerias.js"></script>
+    <script src="scripts.js"></script>
 
   </body>
 </html>
