@@ -75,8 +75,8 @@
         </div>
 
         <div class="contenido-cards">
-          <p class="mensajes">Aquí te dejamos nuestras sugerencias</p>
-
+          <p class="mensajes">Nuestros artistas destacados</p>
+          
             <div class="btn-group mb-1" role="group" aria-label="Basic mixed styles example">
               <button type="button" class="btn btn-secondary filtro" id="60">Oldies</button>
               <button type="button" class="btn btn-danger filtro" id="70">70's</button>
@@ -124,7 +124,6 @@
         <div class="container flex">
           <div class="col-6 col-md-6">
               <label for="formFileLg" class="form-label mt-5">Podes buscar tu canción acá</label>
-              <!-- <input type="text" id="buscador" class="form-control form-control-lg my-2" placeholder="..."> -->
               <div class="input-group mb-3">
                 <input type="text" class="form-control" id="buscador" placeholder="..."  aria-describedby="button-addon2">
                 <button class="btn btn-outline-dark" type="button" onclick="filtrarBusqueda()">Buscar</button>
@@ -135,6 +134,25 @@
         <div class="contenido-cards">
             <div class="row col-8" id="resultado"></div>
         </div>
+
+        <button class="btn btn-md btn-outline-light mb-5" type="button" id="catalogo">
+          ¿Queres ver todo nuestro catálogo?
+        </button>
+        
+        <div class="col-9 mb-3">
+          <table class="table d-none">
+            <thead>
+              <tr>
+                <th>Artista</th>
+                <th>Cancion</th>
+                <th>Album</th>
+                <th>Año</th>
+              </tr>
+            </thead>
+              <tbody id="listadoSongs" class="table col-9"></tbody>
+          </table>
+        </div>
+        
 
         <div style="height: 100px;"></div>
 

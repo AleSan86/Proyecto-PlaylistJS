@@ -232,15 +232,49 @@ function renderFiltro(anio) {
         mostrarCanciones(canciones);
 }
 
+/* FETCH por ruta relativa */
+const listadoSongs = document.getElementById("listadoSongs");
+const songs = "songs.json";
 
+fetch(songs)
+    .then(respuesta => respuesta.json())
+    .then(datos => {
+        listadoSongs.innerHTML = ""
+            datos.songs.forEach(song => {
+            listadoSongs.innerHTML +=  `
+                    <tr>
+                        <td>${song.artist}</td>
+                        <td>${song.title}</td>
+                        <td>${song.album}</td>
+                        <td>${song.year}</td>
+                    </tr>
+            `
+        })
+    })
+    .catch(error => console.log(error))
+    .finally(() => console.log("Fin"));
 
+const catalogo = document.getElementById("catalogo")
+catalogo.addEventListener("click", () => {
+    const tabla = document.querySelector(".table");
+    tabla.classList.toggle("d-none")
+    if(!tabla.classList.contains("d-none")){
+        catalogo.textContent = "Ocultar catálogo"
+    } else {
+        catalogo.textContent = "¿Queres ver todo nuestro catálogo?"
+    }
+})
 
+/* FETCH */
+// const urlSpotify = "https://radio-world-50-000-radios-stations.p.rapidapi.com/";
+// const contenedorSpotify =  document.getElementById("contenedorSpotify");
 
-
-
-
-
-
+// fetch(urlSpotify)
+//     .then(respuesta => respuesta.json())
+//     .then((datos) => {
+//         console.log(datos);
+//     })
+//     .catch(error => console.log(error));
 
 
 
