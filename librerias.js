@@ -4,7 +4,7 @@ boton.addEventListener("click", () => {
     Swal.fire({
         icon: 'warning',
         title: 'Descripción del proyecto',
-        text: 'Crear y administrar Playlists y realizar distintos calculos informátivos para el usuario',
+        text: 'Crear y administrar una Playlist a través de JS',
         backdrop: 'rgba(255, 255, 255, 0.3)'
     })
 })

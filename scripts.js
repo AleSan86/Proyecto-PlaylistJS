@@ -261,9 +261,10 @@ catalogo.addEventListener("click", () => {
     if(!tabla.classList.contains("d-none")){
         catalogo.textContent = "Ocultar catálogo"
     } else {
-        catalogo.textContent = "¿Queres ver todo nuestro catálogo?"
+        catalogo.textContent = "¿Queres ver nuestras próximas canciones?"
     }
 })
+
 
 /* FETCH */
 // const urlSpotify = "https://radio-world-50-000-radios-stations.p.rapidapi.com/";
