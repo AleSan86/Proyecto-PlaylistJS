@@ -7,6 +7,6 @@ Caraterísticas de desarrollo
 </ul>
 <hr>
 <h3>Descripción general</h3>
-Página web para crear una Playlist y calcular la cantidad de canciones y la duración total de la misma.
+Página web para crear una Playlist con JS.
 <br>
-Es un proyecto web con poca información detallada, confeccionada para la materia de "Javascript" de CoderHouse.
+Confeccionada para la materia de "Javascript" de CoderHouse.
